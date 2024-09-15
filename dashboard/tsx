@@ -1,0 +1,168 @@
+import React from 'react'
+import { Bell, ChevronDown, Layout, BarChart, Users, FileText, Settings, LogOut } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+export default function Dashboard() {
+  return (
+    <div className="flex h-screen bg-gray-100">
+      {/* サイドバー */}
+      <aside className="w-64 bg-white shadow-md">
+        <div className="p-4">
+          <h1 className="text-2xl font-bold text-gray-800">求人予測AI</h1>
+        </div>
+        <nav className="mt-6">
+          <a className="flex items-center py-2 px-4 bg-gray-200 text-gray-700" href="#">
+            <Layout className="mr-3 h-5 w-5" />
+            ダッシュボード
+          </a>
+          <a className="flex items-center mt-2 py-2 px-4 text-gray-600 hover:bg-gray-200" href="#">
+            <BarChart className="mr-3 h-5 w-5" />
+            分析
+          </a>
+          <a className="flex items-center mt-2 py-2 px-4 text-gray-600 hover:bg-gray-200" href="#">
+            <Users className="mr-3 h-5 w-5" />
+            求人掲載
+          </a>
+          <a className="flex items-center mt-2 py-2 px-4 text-gray-600 hover:bg-gray-200" href="#">
+            <FileText className="mr-3 h-5 w-5" />
+            レポート
+          </a>
+          <a className="flex items-center mt-2 py-2 px-4 text-gray-600 hover:bg-gray-200" href="#">
+            <Settings className="mr-3 h-5 w-5" />
+            設定
+          </a>
+        </nav>
+      </aside>
+
+      {/* メインコンテンツ */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* ヘッダー */}
+        <header className="flex items-center justify-between p-4 bg-white shadow-md">
+          <div className="flex items-center">
+            <input
+              type="text"
+              placeholder="検索..."
+              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="flex items-center">
+            <Button variant="ghost" size="icon">
+              <Bell className="h-5 w-5" />
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="ml-2">
+                  <span className="mr-2">山田太郎</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>マイアカウント</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>プロフィール</DropdownMenuItem>
+                <DropdownMenuItem>設定</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>ログアウト</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </header>
+
+        {/* ダッシュボードコンテンツ */}
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">ダッシュボード</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">総求人数</CardTitle>
+                <FileText className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">254</div>
+                <p className="text-xs text-muted-foreground">先月比 +12%</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">平均応募数</CardTitle>
+                <Users className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">45</div>
+                <p className="text-xs text-muted-foreground">1求人あたり</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">予測精度</CardTitle>
+                <BarChart className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">89%</div>
+                <p className="text-xs text-muted-foreground">先週比 +2%</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">アクティブな採用</CardTitle>
+                <Layout className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">32</div>
+                <p className="text-xs text-muted-foreground">オープンポジション</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>最近の求人</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { title: "シニアReact開発者", department: "エンジニアリング", predictions: 75 },
+                    { title: "マーケティングマネージャー", department: "マーケティング", predictions: 50 },
+                    { title: "UXデザイナー", department: "デザイン", predictions: 60 },
+                    { title: "データアナリスト", department: "分析", predictions: 40 },
+                  ].map((job, index) => (
+                    <div key={index} className="flex items-center">
+                      <div className="ml-4 space-y-1">
+                        <p className="text-sm font-medium leading-none">{job.title}</p>
+                        <p className="text-sm text-muted-foreground">{job.department}</p>
+                      </div>
+                      <div className="ml-auto font-medium">予測応募数: 約{job.predictions}件</div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>予測精度の推移</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[200px] w-full bg-gray-100 rounded-md flex items-center justify-center">
+                  [予測精度チャートのプレースホルダー]
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+      </div>
+    </div>
+  )
+}
